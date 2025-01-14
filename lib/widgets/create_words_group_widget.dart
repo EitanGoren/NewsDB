@@ -150,9 +150,8 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
                                     return;
                                   }
 
-                                  List<String> a = List<String>.from(_newGroupInfo['Words']);
-                                  a.addAll(clickedWordsList);
-
+                                  _newGroupInfo['Words'] = [];
+                                  _newGroupInfo['Words'].addAll(clickedWordsList);
                                   if(_newGroupInfo['Words'].isNotEmpty){
                                     _newGroupInfo['Words_ids'] = [];
                                     for (final word in _newGroupInfo['Words']){

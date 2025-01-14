@@ -91,3 +91,12 @@ Future<String> getArticleContentByArticleName(String articleName) async{
   return fileContent.toString();
 }
 
+List<String> splitByExactWord(String text, String word) {
+  // Create a regular expression to match the exact word
+  RegExp regex = RegExp(r'\b' + RegExp.escape(word) + r'\b');
+
+  // Split the string by the exact word
+  return text.split(regex);
+}
+
+

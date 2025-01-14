@@ -46,6 +46,25 @@ class Server {
     }
   }
 
+  static Future<List> getStatistics() async {
+    Uri dbStatistics = Uri.parse('$baseUrl/db_statistics');
+    final response = await http.get(dbStatistics);
+    List<dynamic> result = [];
+    try {
+      //converting it from json to key value pair
+      final decoded = json.decode(response.body) as Map<String, dynamic>;
+      result = decoded['data'];
+    }on Exception catch (e) {
+      // Anything else that is an exception
+      print('Unknown exception: $e');
+    } catch (e) {
+      // No specified type, handles all
+      print('Something really unknown: $e');
+    } finally{
+      return result;
+    }
+  }
+
   static Future<void> exportDbToXml() async {
     Uri exportDB = Uri.parse('$baseUrl/export_db_to_xml');
     final response = await http.get(exportDB);
