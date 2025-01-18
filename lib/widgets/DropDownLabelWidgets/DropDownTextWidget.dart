@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class DropDownTextWidget extends StatelessWidget {
   final String labelText;
   final ValueChanged<List<String>> updateValue;
-  final Set<String> dataList;
+  final List<String> dataList;
 
   const DropDownTextWidget({super.key, required this.labelText, required this.updateValue, required this.dataList});
 

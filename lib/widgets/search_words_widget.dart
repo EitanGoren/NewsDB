@@ -15,10 +15,10 @@ class SearchWordsWidget extends StatefulWidget {
 class _SearchWordsState extends State<SearchWordsWidget> {
   List<String> articlesList = [''];
   List<dynamic> articlesAllInfoList = [];
-  Set<String> pageList = {''};
-  Set<String> lineList = {''};
-  Set<String> placeInLineList = {''};
-  Set<String> lengthsList = {''};
+  List<String> pageList = [];
+  List<String> lineList = [];
+  List<String> placeInLineList = [];
+  List<String> lengthsList = [];
   late Map<String, dynamic> _queryServerResponse = {
     'success': true,
     'response': ''
@@ -97,21 +97,15 @@ class _SearchWordsState extends State<SearchWordsWidget> {
                                             }
                                           }
 
-                                          Map? response = await Server.getWordsByArticleInfo(artIds);
+                                          Map? response = await Server.getDistinctInfoByArticleName(value);
                                           setState(() {
                                             _queryServerResponse['success'] = response!['success'];
                                             _queryServerResponse['response'] = response['response'].toString();
                                             if(response['success']){
-                                              pageList = {...response['pages']};
-                                              lineList = {...response['lines']};
-                                              lengthsList = {...response['lengths']};
-                                              placeInLineList = {...response['place_in_line']};
-
-                                              pageList.add("");pageList.addAll(pageList);
-                                              lineList.add("");lineList.addAll(lineList);
-                                              lengthsList.add("");lengthsList.addAll(lengthsList);
-                                              placeInLineList.add("");placeInLineList.addAll(placeInLineList);
-
+                                              pageList = response['data']['pages'];
+                                              lineList = response['data']['lines'];
+                                              lengthsList = response['data']['lengths'];
+                                              placeInLineList = response['data']['place_in_line'];
                                               pageValue = '';
                                               lineValue = '';
                                               lengthsValue = '';
@@ -257,7 +251,7 @@ class _SearchWordsState extends State<SearchWordsWidget> {
                     return WordsListWidget(index: index, wordsData: _wordsList,);
                   },
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5, mainAxisExtent: 60),
-                ) : const Center(child: Text("Nothing to show...", style: TextStyle(fontSize: 30, color: Colors.black54),),),
+                ) : const Center(child: Text("Nothing to show...", style: TextStyle(fontSize: 20, color: Colors.black54),),),
               ),
             ),
           ],)

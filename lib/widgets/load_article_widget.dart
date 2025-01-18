@@ -13,7 +13,7 @@ class LoadArticleWidget extends StatefulWidget {
 }
 
 class _LoadArticleState extends State<LoadArticleWidget> {
-  Set<String> articlesList = {};
+  List<String> articlesList = [];
   Map<String, String> articlesIDList = {};
   late Map<String,dynamic> _query_server_response = {'success': false, 'response': ''};
   final Map<String, dynamic> _newArticleInfo = {

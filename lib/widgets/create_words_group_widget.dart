@@ -25,7 +25,6 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
   String selectedWordsString = '';
   bool showGroups = false;
   late Map<String,dynamic> _queryServerResponse = {'success': false, 'response': ''};
-  Map<String, String> groupsIDList = {};
   final Map<String, dynamic> _newGroupInfo = {
     'Group Name': '',
     'Words': List<String>,
@@ -206,7 +205,7 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
                                 child: DropDownTextWidget(
                                   labelText: 'Groups',
                                   updateValue: _selectGroup,
-                                  dataList: groupsList.toSet(),
+                                  dataList: groupsList,
                                 ),
                             ),
                           ),
@@ -259,6 +258,10 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
                                       if(_queryServerResponse['success']){
                                         fetchGroupsWordsList(_selectedGroup);
                                       }
+                                    });
+
+                                    setState(() {
+                                      fetchAllWordsList();
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -323,7 +326,7 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
                         return temp;
                       },
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
-                    ) : const Center(child: Text("Nothing to show...", style: TextStyle(fontSize: 30, color: Colors.black54),),),
+                    ) : const Center(child: Text("Nothing to show...", style: TextStyle(fontSize: 20, color: Colors.black54),),),
                 ),
               ),
               Expanded(
@@ -348,7 +351,7 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
                           child: groupsList.isNotEmpty ? ListView.builder(
                             itemCount: groupsList.length,
                             itemBuilder: (context, index) {
-                              return GroupsListWidget(index: index, groupsData: groupsList,);
+                              return GroupsListWidget(index: index, groupsData: groupsList);
                             },
                             padding: const EdgeInsets.all(14.0),
                           ) : const Center(child: Text("Nothing to show...", style: TextStyle(fontSize: 30, color: Colors.black54),),),
@@ -370,18 +373,16 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
     List? response = await Server.getAllGroups();
     if(response.isNotEmpty){
       groupsList.clear();
-      groupsIDList.clear();
       for(final groupName in response){
         setState(() {
           groupsList.add(groupName[1]);
-          groupsIDList[groupName[1]] = groupName[0];
         });
       }
     }
   }
 
   void fetchGroupsWordsList(String groupName) async{
-    List? response = await Server.getAllGroupWordsByGroupId(groupName);
+    List? response = await Server.getAllGroupWordsByGroupName(groupName);
     if(response!.isNotEmpty){
       groupWordsList.clear();
       for(final word in response){

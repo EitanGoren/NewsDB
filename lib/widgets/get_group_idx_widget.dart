@@ -70,7 +70,7 @@ class _GetGroupIdxState extends State<GetGroupIdxWidget> {
                                       child: DropDownTextWidget(
                                         labelText: 'Groups',
                                         updateValue: _selectGroup,
-                                        dataList: groupsList.toSet(),
+                                        dataList: groupsList,
                                       ),
                                     ),
                                   ),
@@ -176,7 +176,7 @@ class _GetGroupIdxState extends State<GetGroupIdxWidget> {
   }
 
   void fetchGroupsWordsList(String groupName) async{
-    List? response = await Server.getAllGroupWordsByGroupId(groupName);
+    List? response = await Server.getAllGroupWordsByGroupName(groupName);
     if(response!.isNotEmpty){
       groupWordsList.clear();
       for(final word in response){

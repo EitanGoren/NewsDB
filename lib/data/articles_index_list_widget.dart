@@ -15,7 +15,7 @@ class _ArticlesIndexListWidgetState extends State<ArticlesIndexListWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(10),
       child: Material(
         elevation: 12,
         borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), bottomRight: Radius.circular(30),),

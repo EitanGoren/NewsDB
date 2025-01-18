@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_db/data/articles_list_widget.dart';
 
+import '../backend/server.dart';
 import '../data/phrases_list_widget.dart';
+import 'DropDownLabelWidgets/DropDownTextWidget.dart';
+import 'EditTextWidgets/edit_text_widget.dart';
+import 'TextSelector.dart';
 
 class EnterPhraseWidget extends StatefulWidget {
   const EnterPhraseWidget({super.key});
@@ -12,8 +16,63 @@ class EnterPhraseWidget extends StatefulWidget {
 }
 
 class _EnterPhraseState extends State<EnterPhraseWidget> {
-  List<String> articlesList = <String>['All Articles', 'Article 1', 'Article 2', 'Article 3', 'Article 4'];
-  String selectedOption = 'article';
+  List<String> articlesList = [];
+  List<String> phrasesList = [];
+  String selectedOption= 'enter';
+  Set<String> selectedWordsList = {};
+  Set<String> clickedWordsList = {};
+  String selectedWordsString = '';
+  String _selectedArticle = '';
+  late Map<String,dynamic> _queryServerResponse = {'success': false, 'response': ''};
+  final Map<String, dynamic> _newPhraseInfo = {
+    'first_word': '',
+    'length': int,
+    'article_id': ''
+  };
+
+  void _updateValue(List<String> values) {
+    setState(() {
+      _queryServerResponse = {'success': false, 'response': ''};
+      if(values.length == 2) {
+        if(values.first == 'Enter Phrase'){
+          _newPhraseInfo['first_word'] = (values.last).toString().split(' ')[0];
+          _newPhraseInfo['length'] = values.length;
+        }
+        else {
+          _newPhraseInfo[values.first] = values.last;
+        }
+      }
+    });
+  }
+
+  void _selectArticle(List<String> values) {
+    setState(() {
+      clickedWordsList.clear();
+      selectedWordsList.clear();
+      selectedWordsString = '';
+      _queryServerResponse = {'success': false, 'response': ''};
+      if(values.length == 2) {
+        _selectedArticle = values.last;
+      }
+    });
+  }
+
+  void _chosenWords(List<String> values) {
+    setState(() {
+      if(values.length == 2) {
+        if(values.first == 'Enter Phrase'){
+          selectedWordsString = values.last;
+        }
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    fetchArticlesList();
+    fetchPhrasesList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,32 +130,39 @@ class _EnterPhraseState extends State<EnterPhraseWidget> {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                                   child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                                      child: TextFormField(
-                                        enabled: selectedOption == "enter" ? true : false,
-                                        decoration: InputDecoration(
-                                          border: const OutlineInputBorder(),
-                                          labelText: 'Enter Phrase',
-                                          labelStyle: GoogleFonts.montserrat(fontSize: 20,),
-                                        ),
-                                      ),
+                                    child: EditTextWidget(
+                                      labelText: 'Enter Phrase',
+                                      updateValue: _updateValue,
                                     ),
                                   ),),
                                 SizedBox(
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
                                     child: ElevatedButton(
-                                      onPressed: () {
-                                          if (selectedOption == "enter") {
-                                            // do stuff
+                                      onPressed: () async {
+                                        if (_newPhraseInfo['first_word'] == ''){
+                                          setState(() {
+                                            _queryServerResponse['success'] = false;
+                                            _queryServerResponse['response'] = "Missing phrase.. Try Again";
+                                          });
+                                          return;
+                                        }
+
+                                        if(clickedWordsList.isNotEmpty){
+                                          _newPhraseInfo['first_word'] = clickedWordsList.first;
+                                          _newPhraseInfo['length'] = clickedWordsList.length;
+                                        }
+
+                                        Map? response = await Server.defineNewPhrase(_newPhraseInfo);
+                                        setState(() {
+                                          _queryServerResponse['success'] = response!['success'];
+                                          _queryServerResponse['response'] = response['response'].toString();
+                                          if(_queryServerResponse['success']){
+                                            fetchPhrasesList();
                                           }
-                                          else {
-                                            // do nothing
-                                          }
+                                        });
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        enableFeedback: selectedOption == "enter" ? true : false,
                                         backgroundColor: Colors.blueGrey.shade600,
                                         overlayColor: Colors.blue.shade50,
                                         elevation: 15,
@@ -105,7 +171,7 @@ class _EnterPhraseState extends State<EnterPhraseWidget> {
                                       ),
                                       child: const Padding(
                                         padding: EdgeInsets.all(15),
-                                        child:Text('Save Phrase',
+                                        child:Text('Insert Phrase',
                                           style: TextStyle(fontSize: 25, color: Colors.white,),),
                                       ),
                                     ),
@@ -128,37 +194,38 @@ class _EnterPhraseState extends State<EnterPhraseWidget> {
                   children: [
                     Expanded(
                       child: Padding(padding: const EdgeInsets.all(15),
-                        child: GridView.builder(
-                          itemCount: 5,
+                        child: TextSelector(),
+                        // child: GridView.builder(
+                        //   itemCount: articlesList.length,
+                        //   itemBuilder: (context, index) {
+                        //     return ArticlesListWidget(index: index, articlesData: articlesList,);
+                        //   },
+                        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                        // ),
+                      ),
+                    ),
+                  ],)
+                    : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: Text('Phrase Found in DB', style: GoogleFonts.ubuntuMono(fontSize: 32, color: Colors.black54),),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20, top: 5),
+                        child: ListView.builder(
+                          itemCount: phrasesList.length,
                           itemBuilder: (context, index) {
-                            return ArticlesListWidget(index: index, articlesData: [],);
+                            return PhrasesListWidget(index: index, phrasesList: phrasesList);
                           },
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                          padding: const EdgeInsets.all(10.0),
                         ),
                       ),
-                  ),
-                ],)
-                  : Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25),
-                        child: Text('Phrase Found in DB', style: GoogleFonts.ubuntuMono(fontSize: 32, color: Colors.black54),),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20, top: 5),
-                          child: ListView.builder(
-                            itemCount: 3,
-                            itemBuilder: (context, index) {
-                              return PhrasesListWidget(index: index);
-                            },
-                            padding: const EdgeInsets.all(10.0),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
+                  ],
                 ),
               ),
             ],),
@@ -185,9 +252,9 @@ class _EnterPhraseState extends State<EnterPhraseWidget> {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 5, top: 5),
                       child: ListView.builder(
-                        itemCount: 40,
+                        itemCount: phrasesList.length,
                         itemBuilder: (context, index) {
-                          return PhrasesListWidget(index: index);
+                          return PhrasesListWidget(index: index, phrasesList: phrasesList);
                         },
                         padding: const EdgeInsets.all(10.0),
                       ),
@@ -199,5 +266,28 @@ class _EnterPhraseState extends State<EnterPhraseWidget> {
         ],
       ),
     );
+  }
+
+  void fetchArticlesList() async {
+    List? articles = await Server.getAllArticles();
+    if (articles.isNotEmpty) {
+      articlesList.clear();
+      for (final artName in articles) {
+        setState(() {
+          articlesList.add(artName[1]);
+        });
+      }
+    }
+  }
+  void fetchPhrasesList() async{
+    List? phrases = await Server.getAllPhrases();
+    if(phrases.isNotEmpty){
+      phrasesList.clear();
+      for(final phrName in phrases){
+        setState(() {
+          phrasesList.add(phrName[1]);
+        });
+      }
+    }
   }
 }

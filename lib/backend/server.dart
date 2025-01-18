@@ -46,6 +46,25 @@ class Server {
     }
   }
 
+  static Future<List> getAllPhrases() async {
+    Uri allPhrases = Uri.parse('$baseUrl/all_phrases');
+    final response = await http.get(allPhrases);
+    List<dynamic> result = [];
+    try {
+      //converting it from json to key value pair
+      final decoded = json.decode(response.body) as Map<String, dynamic>;
+      result = decoded['data'];
+    }on Exception catch (e) {
+      // Anything else that is an exception
+      print('Unknown exception: $e');
+    } catch (e) {
+      // No specified type, handles all
+      print('Something really unknown: $e');
+    } finally{
+      return result;
+    }
+  }
+
   static Future<List> getStatistics() async {
     Uri dbStatistics = Uri.parse('$baseUrl/db_statistics');
     final response = await http.get(dbStatistics);
@@ -164,7 +183,7 @@ class Server {
     }
   }
 
-  static Future<dynamic> getAllGroupWordsByGroupId(String groupName) async {
+  static Future<dynamic> getAllGroupWordsByGroupName(String groupName) async {
     final response = await http.post(
       Uri.parse('$baseUrl/all_group_words'),
       headers: <String, String>{
@@ -331,6 +350,34 @@ class Server {
     return values;
   }
 
+  static Future<Map?> getDistinctInfoByArticleName(String? articleName) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/get_all_distinct_info_by_art_name'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'article_name': articleName,
+      }),
+      encoding: Encoding.getByName("utf-8")
+    );
+
+    var result = await json.decode(json.encode(response.body));
+    Map values = jsonDecode(result);
+
+    List<dynamic> dynamicPages = values['data']['pages'];
+    List<dynamic> dynamicLines = values['data']['lines'];
+    List<dynamic> dynamicLengths = values['data']['lengths'];
+    List<dynamic> dynamicPlaceInLine = values['data']['place_in_line'];
+
+    values['data']['pages'] = dynamicPages.map((item) => item.toString()).toList();
+    values['data']['lines'] = dynamicLines.map((item) => item.toString()).toList();
+    values['data']['lengths'] = dynamicLengths.map((item) => item.toString()).toList();
+    values['data']['place_in_line'] = dynamicPlaceInLine.map((item) => item.toString()).toList();
+
+    return values;
+  }
+
   static Future<Map?> addWordsToGroup(Map<String, dynamic> info) async {
     final response = await http.post(
       Uri.parse('$baseUrl/add_words_to_group'),
@@ -391,6 +438,35 @@ class Server {
       }
     } else {
       print('No file selected');
+    }
+  }
+
+  static defineNewPhrase(Map<String, dynamic> info) async {
+    final response = await http.post(
+        Uri.parse('$baseUrl/insert_new_phrase'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          'article_id': info['article_id'],
+          'length': info['length'],
+          'first_word': info['first_word'],
+        }),
+
+        encoding: Encoding.getByName("utf-8")
+    );
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      var result = await json.decode(json.encode(response.body));
+      print(result);
+      Map values = jsonDecode(result);
+      return values;
+    }
+    else {
+      // If the server did not return a 201 CREATED response,
+      return {'success': false, 'response': response.reasonPhrase};
     }
   }
 }

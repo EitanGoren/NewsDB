@@ -3,8 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class PhrasesListWidget extends StatefulWidget {
   final int index;
+  final List<String> phrasesList;
 
-  const PhrasesListWidget({super.key, required this.index});
+  const PhrasesListWidget({super.key, required this.index, required this.phrasesList});
 
   @override
   State<PhrasesListWidget> createState() => _PhrasesListWidgetState();
@@ -26,7 +27,7 @@ class _PhrasesListWidgetState extends State<PhrasesListWidget> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text('Phrase ${widget.index}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black54),),
+                child: Text('Phrase ${widget.phrasesList[widget.index]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black54),),
               ),
             ),
         ],),
