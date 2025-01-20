@@ -32,7 +32,6 @@ class _WordsListWidgetState extends State<WordsListWidget> {
             child: TextButton(
               onPressed: () async{
                 String data = await getArticleContentByArticleName(widget.wordsData[widget.index][5]);
-
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {

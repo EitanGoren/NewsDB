@@ -1,27 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextSelector extends StatefulWidget {
-  const TextSelector({super.key});
+  final String articleText;
+  final String articleName;
+  final ValueChanged<String> chosenPhrase;
+
+  const TextSelector({super.key, required this.articleText, required this.chosenPhrase, required this.articleName});
 
   @override
   State<TextSelector> createState() => _TextSelectorState();
 }
 
 class _TextSelectorState extends State<TextSelector> {
-  final String text =
-      "This is a sample text. You can select any length of words, phrases, or sentences.";
   late TextEditingController _controller;
-
   String selectedText = "";
+
+  @override
+  void didUpdateWidget(covariant TextSelector oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Check if the articleText has changed
+    if (oldWidget.articleText != widget.articleText) {
+      setState(() {
+        _controller = TextEditingController(text: widget.articleText);
+        _controller.addListener(() {
+          setState(() {
+            selectedText = getSelectedText();
+            widget.chosenPhrase(selectedText);
+          });
+        });
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: text);
+    _controller = TextEditingController(text: widget.articleText);
+
     // Add a listener to track selection changes
     _controller.addListener(() {
       setState(() {
         selectedText = getSelectedText();
+        widget.chosenPhrase(selectedText);
       });
     });
   }
@@ -35,24 +56,24 @@ class _TextSelectorState extends State<TextSelector> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Select any text below:",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              "Select any phrase from ${widget.articleName}",
+              style: GoogleFonts.ubuntuMono(fontSize: 24, color: Colors.black87, fontWeight: FontWeight.bold)
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             TextField(
               controller: _controller,
               readOnly: true,
-              maxLines: null, // Allow multiple lines
-              style: TextStyle(fontSize: 16),
+              maxLines: 7, // Allow multiple lines
+              style: TextStyle(fontSize: 18),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
               ),
-              onTapAlwaysCalled: true,
+              onTapAlwaysCalled: false,
               onTap: () {
                 // Update selected text on tap
                 Future.delayed(Duration(milliseconds: 100), () {
@@ -62,16 +83,15 @@ class _TextSelectorState extends State<TextSelector> {
                 });
               }
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 15),
             Text(
-              "Selected Text:",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              "Selected Phrase:",
+               style: GoogleFonts.ubuntuMono(fontSize: 24, color: Colors.black87, fontWeight: FontWeight.bold)
             ),
             SizedBox(height: 5),
-            Text(
-              selectedText.isNotEmpty ? selectedText : "No text selected",
-              style: TextStyle(fontSize: 16, color: Colors.black87),
-            ),
+            selectedText.isNotEmpty ? Text(selectedText,
+              style: GoogleFonts.ubuntuMono(fontSize: 16, color: Colors.black87, fontWeight: FontWeight.bold),) : Text( "No text selected",
+              style: GoogleFonts.ubuntuMono(fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),)
           ],
         ),
     );
@@ -80,7 +100,7 @@ class _TextSelectorState extends State<TextSelector> {
   String getSelectedText() {
     final selection = _controller.selection;
     if (selection.start >= 0 && selection.end >= 0) {
-      return text.substring(selection.start, selection.end);
+      return widget.articleText.substring(selection.start, selection.end);
     }
     return "";
   }

@@ -2,8 +2,6 @@ import 'dart:core';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:news_db/backend/server.dart';
-import 'package:path_provider/path_provider.dart';
-
 
 Future<List<String>> readArticleFile() async {
 

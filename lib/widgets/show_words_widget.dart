@@ -95,7 +95,6 @@ class _ShowWordsState extends State<ShowWordsWidget> {
                                   return;
                                 }
 
-                                //todo: Send _showWordsInfo to server and get matching words..
                                 Map? response = await Server.getAllWordsByCriteria(_showWordsInfo);
                                 // At least one param is set.
                                 setState(() {

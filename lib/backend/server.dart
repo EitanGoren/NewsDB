@@ -448,9 +448,9 @@ class Server {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode({
-          'article_id': info['article_id'],
+          'article_name': info['article_name'],
           'length': info['length'],
-          'first_word': info['first_word'],
+          'phrase': info['phrase'],
         }),
 
         encoding: Encoding.getByName("utf-8")
