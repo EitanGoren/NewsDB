@@ -183,7 +183,7 @@ class _SearchArticleState extends State<SearchArticleWidget> {
               ),
               Expanded(
                 flex: 10,
-                child: Padding(padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: _articlesList.isNotEmpty ? GridView.builder(
                     itemCount: _articlesList.length,
                     itemBuilder: (context, index) {

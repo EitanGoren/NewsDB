@@ -32,13 +32,13 @@ class _WordsListWidgetState extends State<WordsListWidget> {
             height: 40,
             child: TextButton(
               onPressed: () async{
-                String data = await getArticleContentByArticleName(widget.wordsData[widget.index][5]);
+                String data = await getArticleContentByArticleName(widget.wordsData[widget.index][0]);
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
                       scrollable: true,
-                      title: Center(child: Text('${widget.wordsData[widget.index][0]}', style: GoogleFonts.ubuntuMono(fontSize: 35, color: Colors.black87))),
+                      title: Center(child: Text('${widget.wordsData[widget.index][5]}', style: GoogleFonts.ubuntuMono(fontSize: 35, color: Colors.black87))),
                       content: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Form(
@@ -46,13 +46,13 @@ class _WordsListWidgetState extends State<WordsListWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Article Name: ${widget.wordsData[widget.index][5]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.red),),
-                                Text('Length: ${widget.wordsData[widget.index][1]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87),),
-                                Text('Page: ${widget.wordsData[widget.index][2]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87),),
-                                Text('Line in page: ${widget.wordsData[widget.index][3]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87),),
-                                Text('Place in line: ${widget.wordsData[widget.index][4]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87),),
+                                Text('Article Name: ${widget.wordsData[widget.index][0]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.red),),
+                                Text('Length: ${widget.wordsData[widget.index][4]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87),),
+                                Text('Page: ${widget.wordsData[widget.index][1]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87),),
+                                Text('Line in page: ${widget.wordsData[widget.index][2]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87),),
+                                Text('Place in line: ${widget.wordsData[widget.index][3]}', style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87),),
                                 SizedBox(height: 30,),
-                                buildHighlightedText(data, widget.wordsData[widget.index][0]),
+                                buildHighlightedText(data, widget.wordsData[widget.index][5]),
                               ],
                             )
                         ),
@@ -61,7 +61,7 @@ class _WordsListWidgetState extends State<WordsListWidget> {
                   },
                 );
               },
-              child: Center(child: Text('${widget.wordsData[widget.index][0]}', style: GoogleFonts.ubuntuMono(fontSize: 15, color: Colors.black87),),),
+              child: Center(child: Text('${widget.wordsData[widget.index][5]}', style: GoogleFonts.ubuntuMono(fontSize: 15, color: Colors.black87),),),
               // label: Text('Index', style: GoogleFonts.ubuntuMono(fontSize: 14, color: Colors.black54),),
             ),
           ),

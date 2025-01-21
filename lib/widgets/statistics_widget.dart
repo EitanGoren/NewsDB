@@ -30,7 +30,7 @@ class _StatisticsState extends State<StatisticsWidget> {
           itemBuilder: (context, index) {
             return ArticlesIndexListWidget(index: index, statisticsList: statisticsList,);
           },
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
         ),
       ),
     );

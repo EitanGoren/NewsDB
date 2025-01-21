@@ -176,13 +176,13 @@ def getStats():
         stats = """
                    SELECT 
                         a.article_id,
-                        a.article_name, -- Assuming the column name for article title is article_name
+                        a.article_name,
                         COUNT(w.word_id) AS word_count,
                         COUNT(DISTINCT w.Page) AS distinct_page_count,
                         COUNT(DISTINCT w.Line) AS distinct_line_count,
                         SUM(w.Length) AS total_length,
-                        AVG(w.Length) AS avg_chars_per_word, -- Average characters per word
-                        AVG(word_count_per_line.word_count) AS avg_words_per_line -- Average words per line
+                        AVG(w.Length) AS avg_chars_per_word, 
+                        AVG(word_count_per_line.word_count) AS avg_words_per_line
                     FROM 
                         articles a
                     LEFT JOIN 
@@ -282,32 +282,28 @@ def searchArticles():
     global response
     if request.method == 'POST':
         try:
-            query = """ SELECT * FROM Articles WHERE """
             request_data = request.data
             request_data = json.loads(request_data.decode('utf-8'))
             article_name = request_data['article_name']
-            if article_name != '':
-                query += f"""Article_name='{article_name}' AND """
             np_name = request_data['np_name']
-            if np_name != '':
-                query += f"""Newspaper='{np_name}' AND """
             date = request_data['date']
-            if date != '':
-                query += f"""Date='{date}' AND """
-            page = request_data['page']
-            if page != '':
-                query += f"""Page='{page}' AND """
             author = request_data['author']
-            if author != '':
-                query += f"""Author='{author}' AND """
             subject = request_data['subject']
-            if subject != '':
-                query += f"""Subject='{subject}' AND """
-
-            query = query[:len(query)-4]
-
             words = str(request_data['specific_words']).split(',')
 
+            query = f"""
+                    SELECT DISTINCT a.*
+                        FROM Articles a
+                        LEFT JOIN WordInfo wi ON a.article_id = wi.article_id
+                        LEFT JOIN Words w ON wi.word_id = w.word_id
+                        WHERE 
+                            (a.article_name LIKE '{article_name}' OR '{article_name}' IS NULL)
+                            AND (a.newspaper LIKE '{np_name}' OR '{np_name}' IS NULL)
+                            AND (a.date_published = '{date}' OR '{date}' IS NULL)
+                            AND (a.author LIKE '{author}' OR '{author}' IS NULL)
+                            AND (a.subject LIKE '{subject}' OR '{subject}' IS NULL)
+                            AND (w.word LIKE '{words[0]}' OR '{words[0]}' IS NULL)
+                    """
             temp = []
             with oracledb.connect(user=username, password=password, dsn=dsn, config_dir=cdir,
                                   wallet_location=wallet_location,
@@ -434,7 +430,8 @@ def insertNewArticleAux(data, article_id, cursor):
     try:
         line_num = 0
         for idx in range(len(data)):
-            words = str(data[idx]).split(' ')
+            _words = str(data[idx]).split(' ')
+            words = [s.replace("'", "''") for s in _words]
             if data[idx] == '':
                 continue
             line_num += 1
@@ -700,38 +697,13 @@ def words_by_article_info():
 def search_words_by_params():
     if request.method == 'POST':
         try:
-            query = """ SELECT Words.word, WordInfo.length, WordInfo.page, WordInfo.line, WordInfo.place_in_line FROM WordInfo INNER JOIN Words ON WordInfo.word_id=Words.word_id WHERE """
-            filled = False
             request_data = request.data
             request_data = json.loads(request_data.decode('utf-8'))
-
             article_name = request_data['article_name']
-            if article_name != '':
-                query += f"""WordInfo.ARTICLE_ID = (SELECT ARTICLE_ID FROM Articles Where article_name='{article_name}') AND """
-                filled = True
             page = request_data['page']
-            if page != '':
-                query += f"""Page='{page}' AND """
-                filled = True
             line = request_data['line']
-            if line != '':
-                query += f"""Line='{line}' AND """
-                filled = True
             place_in_line = request_data['place_in_line']
-            if place_in_line != '':
-                query += f"""Place_in_line='{place_in_line}' AND """
-                filled = True
             length = request_data['length']
-            if length != '':
-                query += f"""Length='{length}' AND """
-                filled = True
-
-            if filled:
-                query = query[:len(query)-4]
-            else:
-                query = query[:len(query) - 7]
-
-            query += f""" ORDER BY Page ASC, Line ASC, Place_in_line ASC """
 
             temp = []
             with oracledb.connect(user=username, password=password, dsn=dsn, config_dir=cdir,
@@ -739,7 +711,20 @@ def search_words_by_params():
                                   wallet_password=wallet_password) as connection:
                 connection.autocommit = True
                 with connection.cursor() as cursor:
-                    res = cursor.execute(query)
+                    query1 = f"""
+                                SELECT a.article_name, wi.page, wi.line, wi.place_in_line, wi.length, w.word
+                                FROM Articles a
+                                LEFT JOIN WordInfo wi ON a.article_id = wi.article_id
+                                LEFT JOIN Words w ON wi.word_id = w.word_id
+                                WHERE 
+                                    (a.article_name LIKE '{article_name}' OR '{article_name}' IS NULL)
+                                    AND (wi.page LIKE '{page}' OR '{page}' IS NULL)
+                                    AND (wi.line LIKE '{line}' OR '{line}' IS NULL)
+                                    AND (wi.place_in_line LIKE '{place_in_line}' OR '{place_in_line}' IS NULL)
+                                    AND (wi.length LIKE '{length}' OR '{length}' IS NULL)
+                                ORDER BY Page ASC, Line ASC, Place_in_line ASC
+                            """
+                    res = cursor.execute(query1)
                     for word in res:
                         word = word + (article_name,)
                         temp.append(word)
@@ -1139,17 +1124,6 @@ def insertNewPhrase():
 
 
 def find_consecutive_tuples(tuples_list, required_length):
-    """
-    Finds 'required_length' tuples in a list where the first and second values are the same,
-    and the third values are consecutive.
-
-    Args:
-        tuples_list (list of tuples): List of tuples with 3 numbers and a length value.
-        required_length (int): The number of consecutive tuples to find.
-
-    Returns:
-        list of tuples: The 'required_length' consecutive tuples, or an empty list if not found.
-    """
     if not tuples_list or required_length <= 0:
         return []
 
@@ -1165,8 +1139,8 @@ def find_consecutive_tuples(tuples_list, required_length):
         for j in range(i + 1, len(sorted_tuples)):
             # Check if the current tuple continues the sequence
             if (sorted_tuples[j][0] == current_sequence[-1][0] and
-                sorted_tuples[j][1] == current_sequence[-1][1] and
-                sorted_tuples[j][2] == current_sequence[-1][2] + 1):
+                    sorted_tuples[j][1] == current_sequence[-1][1] and
+                    sorted_tuples[j][2] == current_sequence[-1][2] + 1):
                 current_sequence.append(sorted_tuples[j])
             else:
                 break  # Sequence is broken
