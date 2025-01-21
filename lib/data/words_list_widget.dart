@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../backend/os_operations.dart';
+import '../widgets/HighlightedTextWidget.dart';
 
 class WordsListWidget extends StatefulWidget {
   final int index;
@@ -67,46 +68,4 @@ class _WordsListWidgetState extends State<WordsListWidget> {
         ),
     ) : Spacer();
   }
-}
-
-Widget buildHighlightedText(String text, String wordToHighlight) {
-  // Create a regular expression to match the exact word
-  RegExp regex = RegExp(r'\b' + RegExp.escape(wordToHighlight) + r'(?!\w)', caseSensitive: false);
-
-  // Split the text into parts using the matching word
-  List<TextSpan> spans = [];
-  int start = 0;
-
-  // Iterate over all matches
-  for (var match in regex.allMatches(text)) {
-    // Add the text before the matching word
-    if (match.start > start) {
-      spans.add(TextSpan(
-        text: text.substring(start, match.start),
-        style: GoogleFonts.ubuntuMono(fontSize: 22, color: Colors.black87)
-      ));
-    }
-
-    // Add the matching word with red color
-    spans.add(TextSpan(
-      text: match.group(0),
-      style: GoogleFonts.ubuntuMono(fontSize: 26, color: Colors.red, fontWeight: FontWeight.bold)
-    ));
-
-    // Update the start position
-    start = match.end;
-  }
-
-  // Add any remaining text after the last match
-  if (start < text.length) {
-    spans.add(TextSpan(
-      text: text.substring(start),
-      style: GoogleFonts.ubuntuMono(fontSize: 22, color: Colors.black87)
-    ));
-  }
-
-  // Return a RichText widget containing the styled spans
-  return RichText(
-    text: TextSpan(children: spans),
-  );
 }

@@ -448,9 +448,38 @@ class Server {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode({
-          'article_name': info['article_name'],
+          'article_id': info['article_id'],
           'length': info['length'],
           'phrase': info['phrase'],
+        }),
+
+        encoding: Encoding.getByName("utf-8")
+    );
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      var result = await json.decode(json.encode(response.body));
+      print(result);
+      Map values = jsonDecode(result);
+      return values;
+    }
+    else {
+      // If the server did not return a 201 CREATED response,
+      return {'success': false, 'response': response.reasonPhrase};
+    }
+  }
+
+  static Future<Map?> getPhraseInfo(Map<String, dynamic> info) async {
+    final response = await http.post(
+        Uri.parse('$baseUrl/get_phrase_info'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          'article_id': info['article_id'],
+          'phrase_id': info['phrase_id'],
+          'length': info['phrase'].toString().trim().split(' ').length,
         }),
 
         encoding: Encoding.getByName("utf-8")

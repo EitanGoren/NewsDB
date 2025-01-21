@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../backend/server.dart';
+import '../widgets/phrase_info_in_article_widget.dart';
+
 class PhrasesListWidget extends StatefulWidget {
   final int index;
-  final List<String> phrasesList;
+  final List<Map<String, String>> phrasesData;
 
-  const PhrasesListWidget({super.key, required this.index, required this.phrasesList});
+  const PhrasesListWidget({super.key, required this.index, required this.phrasesData});
 
   @override
   State<PhrasesListWidget> createState() => _PhrasesListWidgetState();
@@ -17,7 +20,7 @@ class _PhrasesListWidgetState extends State<PhrasesListWidget> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Text(widget.phrasesList[widget.index], style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black54),),
+        child: PhraseInfoInArticleWidget(index: widget.index, phraseData: widget.phrasesData[widget.index]),
       ),
     );
   }

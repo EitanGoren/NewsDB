@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../backend/os_operations.dart';
-import '../backend/server.dart';
 
 class ArticlesListWidget extends StatefulWidget {
   final int index;

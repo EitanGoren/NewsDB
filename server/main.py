@@ -612,7 +612,7 @@ def createPhrasesTable():
     create_table_query = """ 
                             CREATE TABLE Phrases(
                                 Phrase_id VARCHAR(255),
-                                Article_name VARCHAR(255),
+                                Article_id VARCHAR(255),
                                 Phrase VARCHAR(255),
                                 Length INT
                             )
@@ -1040,6 +1040,76 @@ def getPhraseByWordArticleAndNum():
         return jsonify({'get_phrase_by_starting_word': response})
 
 
+@app.route('/get_phrase_info', methods=['GET', 'POST'])
+def getPhraseInfo():
+    global response
+    if request.method == 'POST':
+        # Step 1: Establish connection to the Oracle Database
+        try:
+            request_data = request.data
+            request_data = json.loads(request_data.decode('utf-8'))
+            phrase_id = request_data['phrase_id']
+            article_id = request_data['article_id']
+            length = request_data['length']
+            query = f"""
+                    WITH PhraseWords AS (
+                        SELECT
+                            w.word_id,
+                            w.word,
+                            wi.page,
+                            wi.line,
+                            wi.place_in_line,
+                            ROW_NUMBER() OVER (ORDER BY wi.page, wi.line, wi.place_in_line) AS position
+                        FROM
+                            phrases p
+                        JOIN
+                            words w ON INSTR(',' || REPLACE(LOWER(p.phrase), ' ', ',') || ',', ',' || LOWER(w.word) || ',') > 0
+                        JOIN
+                            wordinfo wi ON w.word_id = wi.word_id AND wi.article_id = p.article_id
+                        WHERE
+                            p.phrase_id = '{phrase_id}'
+                            AND wi.article_id = '{article_id}'
+                    ),
+                    ConsecutiveCheck AS (
+                        SELECT
+                            pw1.word_id,
+                            pw1.page,
+                            pw1.line,
+                            pw1.place_in_line,
+                            pw1.position,
+                            pw1.position - LAG(pw1.position) OVER (ORDER BY pw1.position) AS position_gap
+                        FROM
+                            PhraseWords pw1
+                    )
+                    SELECT
+                        page,
+                        line,
+                        place_in_line
+                    FROM
+                        ConsecutiveCheck
+                    WHERE
+                        position_gap IS NULL OR position_gap = 1
+                    ORDER BY
+                        position
+                    """
+
+            with oracledb.connect(user=username, password=password, dsn=dsn, config_dir=cdir,
+                                  wallet_location=wallet_location,
+                                  wallet_password=wallet_password) as connection:
+                connection.autocommit = True
+                with connection.cursor() as cursor:
+                    cursor.execute(query)
+                    result = cursor.fetchall()
+                    a = find_consecutive_tuples(result, length)
+                    print(a)
+                    print('success!')
+            return jsonify({'success': True, 'response': 'Phrase info fetched successfully!', 'data': a})
+        except Exception as e:
+            return jsonify({'success': False, 'response': e})
+    else:
+        return jsonify({'success': False, 'response': 'Failed!'})
+
+
 @app.route('/insert_new_phrase', methods=['GET', 'POST'])
 def insertNewPhrase():
     global response
@@ -1048,7 +1118,7 @@ def insertNewPhrase():
             request_data = request.data
             request_data = json.loads(request_data.decode('utf-8'))
             phrase_id = uuid.uuid1()
-            article_name = request_data['article_name']
+            article_id = request_data['article_id']
             length = request_data['length']
             phrase = request_data['phrase']
 
@@ -1057,7 +1127,7 @@ def insertNewPhrase():
                                   wallet_password=wallet_password) as connection:
                 connection.autocommit = True
                 with connection.cursor() as cursor:
-                    query = f""" INSERT INTO Phrases VALUES ('{phrase_id}', '{article_name}', '{phrase}', '{length}') """
+                    query = f""" INSERT INTO Phrases VALUES ('{phrase_id}', '{article_id}', '{phrase}', '{length}') """
                     cursor.execute(query)
 
             return jsonify({'success': True, 'response': f'{phrase_id} Added Successfully!'})
@@ -1068,6 +1138,48 @@ def insertNewPhrase():
         return jsonify({'insert_phrase': response})
 
 
+def find_consecutive_tuples(tuples_list, required_length):
+    """
+    Finds 'required_length' tuples in a list where the first and second values are the same,
+    and the third values are consecutive.
+
+    Args:
+        tuples_list (list of tuples): List of tuples with 3 numbers and a length value.
+        required_length (int): The number of consecutive tuples to find.
+
+    Returns:
+        list of tuples: The 'required_length' consecutive tuples, or an empty list if not found.
+    """
+    if not tuples_list or required_length <= 0:
+        return []
+
+    # Sort the list by the first, second, and third values
+    sorted_tuples = sorted(tuples_list, key=lambda x: (x[0], x[1], x[2]))
+
+    # Iterate over the sorted list to find consecutive tuples
+    result = []
+    for i in range(len(sorted_tuples)):
+        # Initialize the current sequence
+        current_sequence = [sorted_tuples[i]]
+
+        for j in range(i + 1, len(sorted_tuples)):
+            # Check if the current tuple continues the sequence
+            if (sorted_tuples[j][0] == current_sequence[-1][0] and
+                sorted_tuples[j][1] == current_sequence[-1][1] and
+                sorted_tuples[j][2] == current_sequence[-1][2] + 1):
+                current_sequence.append(sorted_tuples[j])
+            else:
+                break  # Sequence is broken
+
+            # If the required length is reached, return the sequence
+            if len(current_sequence) == required_length:
+                return current_sequence
+
+    # Return an empty list if no matching sequence is found
+    return []
+
+
 if __name__ == '__main__':
     # debug will allow changes without shutting down the server
     app.run(debug=True)
+    # createPhrasesTable()

@@ -3,10 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TextSelector extends StatefulWidget {
   final String articleText;
-  final String articleName;
   final ValueChanged<String> chosenPhrase;
 
-  const TextSelector({super.key, required this.articleText, required this.chosenPhrase, required this.articleName});
+  const TextSelector({super.key, required this.articleText, required this.chosenPhrase});
 
   @override
   State<TextSelector> createState() => _TextSelectorState();
@@ -59,16 +58,17 @@ class _TextSelectorState extends State<TextSelector> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "Select any phrase from ${widget.articleName}",
+              "Select any phrase from article",
               style: GoogleFonts.ubuntuMono(fontSize: 24, color: Colors.black87, fontWeight: FontWeight.bold)
             ),
             SizedBox(height: 8),
             TextField(
               controller: _controller,
               readOnly: true,
-              maxLines: 7, // Allow multiple lines
+              maxLines: 10, // Allow multiple lines
               style: TextStyle(fontSize: 18),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -90,8 +90,8 @@ class _TextSelectorState extends State<TextSelector> {
             ),
             SizedBox(height: 5),
             selectedText.isNotEmpty ? Text(selectedText,
-              style: GoogleFonts.ubuntuMono(fontSize: 16, color: Colors.black87, fontWeight: FontWeight.bold),) : Text( "No text selected",
-              style: GoogleFonts.ubuntuMono(fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),)
+              style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold),) : Text( "No text selected",
+              style: GoogleFonts.ubuntuMono(fontSize: 20, color: Colors.red, fontWeight: FontWeight.bold),)
           ],
         ),
     );
