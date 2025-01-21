@@ -99,7 +99,7 @@ class Server {
         print('No directory selected.');
       }
 
-      final filePath = '$directoryPath/popo.zip';
+      final filePath = '$directoryPath/exported_db.zip';
 
       // Write the file to the local storage
       final file = File(filePath);

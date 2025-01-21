@@ -1,375 +1,199 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Root>
   <Row>
-    <WORD_ID>ed6981d2-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>Heights,</WORD>
+    <WORD_ID>4dac7d16-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>issued</WORD>
     </Row>
   <Row>
-    <WORD_ID>ed6ff594-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>triggering</WORD>
+    <WORD_ID>4db28ba2-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>a</WORD>
     </Row>
   <Row>
-    <WORD_ID>ed76739c-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>air</WORD>
+    <WORD_ID>4db89fce-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>stern</WORD>
     </Row>
   <Row>
-    <WORD_ID>ed7cb536-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>raid</WORD>
+    <WORD_ID>4dbec340-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>warning</WORD>
     </Row>
   <Row>
-    <WORD_ID>ed832ef2-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>sirens</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed8987a2-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>in</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed949b7e-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>area.</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed9fa12c-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>military</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>eda5f9b4-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>said</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>edb14c42-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>some</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>edb7b370-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>of</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>edcbf1f0-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>intercepted,</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>edd24c6c-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>while</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>edd98edc-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>others</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ede0ac4e-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>landed</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ede80520-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>inside</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>edef033e-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>Israeli</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>edf613cc-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>territory.</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1b67e54-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>Two</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ece54944-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>The</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ecebed44-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>IDF</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ecf252a6-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>reported</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ecf8d888-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>Saturday</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ecff380e-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>that</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed05f356-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>approximately</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed0c5656-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>75</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed12cd2e-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>projectiles</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed193f7e-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>were</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed1f9bf8-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>launched</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1c14500-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>Iranian</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1c923b0-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>soldiers</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1d06d96-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>wounded</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1dc56b0-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>an</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1e7f63c-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>strike</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1eefa68-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>overnight,</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1f65cea-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>Have</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c1fd58ba-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>succumbed</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c204602e-cf85-11ef-95ec-acde48001122</WORD_ID>
+    <WORD_ID>4dc54a9e-d830-11ef-bd62-acde48001122</WORD_ID>
     <WORD>to</WORD>
     </Row>
   <Row>
-    <WORD_ID>c20b733c-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>their</WORD>
+    <WORD_ID>4dcb9390-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Gazans</WORD>
     </Row>
   <Row>
-    <WORD_ID>c21273b2-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>injuries,</WORD>
+    <WORD_ID>4dd1fcc6-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>not</WORD>
     </Row>
   <Row>
-    <WORD_ID>c219727a-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>raising</WORD>
+    <WORD_ID>4ddcace8-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>approach</WORD>
     </Row>
   <Row>
-    <WORD_ID>c22566ca-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>death</WORD>
+    <WORD_ID>4de27a7e-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>troops</WORD>
     </Row>
   <Row>
-    <WORD_ID>c22c64fc-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>toll</WORD>
+    <WORD_ID>4df1bfc0-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>still</WORD>
     </Row>
   <Row>
-    <WORD_ID>c2336cd4-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>among</WORD>
+    <WORD_ID>4df78fa4-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>deployed</WORD>
     </Row>
   <Row>
-    <WORD_ID>c2445760-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>personnel</WORD>
+    <WORD_ID>4dfd1d34-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>in</WORD>
     </Row>
   <Row>
-    <WORD_ID>c2507acc-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>four.</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c25774da-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>Sabereen</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c25e7bae-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>News,</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c265df2a-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>linked</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c271c7a4-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>Iran-aligned</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c278bf28-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>militias</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>c2848858-cf85-11ef-95ec-acde48001122</WORD_ID>
-    <WORD>Iraq,</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>95fc006a-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>Article</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>9603b328-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>1</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>960ab8b2-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>Hi,</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>9616eb82-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>this</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>961df53a-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>article</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>96254448-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>I</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>962c4d38-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>will</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>9633a11e-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>be</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>963ab31e-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>Writing</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>9641ca96-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>about</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed25b4e8-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>across</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed2c1f5e-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
+    <WORD_ID>4e032c60-d830-11ef-bd62-acde48001122</WORD_ID>
     <WORD>the</WORD>
     </Row>
   <Row>
-    <WORD_ID>ed324974-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>northern</WORD>
+    <WORD_ID>4e09482a-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Strip</WORD>
     </Row>
   <Row>
-    <WORD_ID>ed38def6-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>border,</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed3f0d1c-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>into</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed4532a0-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>Israel’s</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed4ba338-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>Upper</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed5223fc-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>Galilee</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed5870d6-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>and</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>ed635ffa-9e74-11ef-81d5-4a2503bc320a</WORD_ID>
-    <WORD>Golan</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>964e476c-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>stupid</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>965588e2-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>shit</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>96628d26-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>nobody</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>966fd404-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>ever</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>96772f24-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>read.</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>96829382-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>just</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>968978e6-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>want</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>9695b4b2-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>check,</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>969cafba-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>whether</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>96a855b8-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>thing</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>96afb2cc-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>works</WORD>
-    </Row>
-  <Row>
-    <WORD_ID>96b6fac8-d019-11ef-b698-acde48001122</WORD_ID>
+    <WORD_ID>4e0eda56-d830-11ef-bd62-acde48001122</WORD_ID>
     <WORD>or</WORD>
     </Row>
   <Row>
-    <WORD_ID>96bdfc56-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>not.</WORD>
+    <WORD_ID>4e192984-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>border</WORD>
     </Row>
   <Row>
-    <WORD_ID>96c50438-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>So</WORD>
+    <WORD_ID>4e1f160a-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>with</WORD>
     </Row>
   <Row>
-    <WORD_ID>96cc5990-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>please</WORD>
+    <WORD_ID>4e24c500-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Israel.</WORD>
     </Row>
   <Row>
-    <WORD_ID>96d3c46e-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>help</WORD>
+    <WORD_ID>4d7514f2-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>The</WORD>
     </Row>
   <Row>
-    <WORD_ID>96ddc478-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>me</WORD>
+    <WORD_ID>4d7ba98e-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>IDF</WORD>
     </Row>
   <Row>
-    <WORD_ID>96e4d3c6-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>do</WORD>
+    <WORD_ID>4d8153f2-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Arabic</WORD>
     </Row>
   <Row>
-    <WORD_ID>96ebde64-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>that,</WORD>
+    <WORD_ID>4d8721e2-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>language</WORD>
     </Row>
   <Row>
-    <WORD_ID>96f30248-d019-11ef-b698-acde48001122</WORD_ID>
-    <WORD>Thanks,</WORD>
+    <WORD_ID>4d8cf0b8-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>spokesperson</WORD>
     </Row>
   <Row>
-    <WORD_ID>f5762996-d02b-11ef-b698-acde48001122</WORD_ID>
-    <WORD>Eitan.</WORD>
+    <WORD_ID>4d930cb4-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Avichay</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4d997626-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Adraee</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4d9fe182-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>on</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4da64cac-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Tuesday</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e2aeb10-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>In</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e3112ce-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>his</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e372592-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>announcement</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e41961c-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>said</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e47e706-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>that</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e4e1bc6-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>if</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e546ddc-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Hamas</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e5a8a82-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>lived</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e60c06e-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>up</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e6f51a6-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>commitments</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e7e4878-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>cease-fire</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e84651e-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>deal,</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e8a3746-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>they</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e908f42-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>would</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e966d2c-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>be</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4e9c9b0c-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>able</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4ea6ec10-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>return</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4eb06326-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>areas</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4ebb14a6-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>northern</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4ec17e9a-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>Gaza</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4ec83910-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>next</WORD>
+    </Row>
+  <Row>
+    <WORD_ID>4ecf501a-d830-11ef-bd62-acde48001122</WORD_ID>
+    <WORD>week.</WORD>
     </Row>
   </Root>

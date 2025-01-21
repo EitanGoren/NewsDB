@@ -13,12 +13,11 @@ app = Flask(__name__)
 global response
 
 articles_output_xml_file = "articles_table.xml"
-expressions_output_xml_file = "expressions_table.xml"
-expressionswords_output_xml_file = "expressionswords_table.xml"
 groups_output_xml_file = "groups_table.xml"
 wordinfo_output_xml_file = "wordinfo_table.xml"
 words_output_xml_file = "words_table.xml"
 wordsgroups_output_xml_file = "wordsgroups_table.xml"
+phrases_output_xml_file = "phrases_table.xml"
 
 IMPORT_FOLDER = 'uploads'  # Folder to save uploaded files
 if not os.path.exists(IMPORT_FOLDER):
@@ -27,6 +26,10 @@ if not os.path.exists(IMPORT_FOLDER):
 EXPORT_FOLDER = 'downloads'  # Folder to save uploaded files
 if not os.path.exists(EXPORT_FOLDER):
     os.makedirs(EXPORT_FOLDER)
+
+ZIPS_FOLDER = 'zips'  # Folder to save uploaded files
+if not os.path.exists(ZIPS_FOLDER):
+    os.makedirs(ZIPS_FOLDER)
 
 
 @app.route('/check_word_exists', methods=['GET', 'POST'])
@@ -893,16 +896,15 @@ def create_folder_if_not_exists(folder_path):
 def exportDbToXml():
     try:
         export_table_to_xml("Articles", f'{EXPORT_FOLDER}/{articles_output_xml_file}')
-        export_table_to_xml("Expressions", f'{EXPORT_FOLDER}/{expressions_output_xml_file}')
-        export_table_to_xml("ExpressionsWords", f'{EXPORT_FOLDER}/{expressionswords_output_xml_file}')
         export_table_to_xml("Groups", f'{EXPORT_FOLDER}/{groups_output_xml_file}')
         export_table_to_xml("Words", f'{EXPORT_FOLDER}/{words_output_xml_file}')
         export_table_to_xml("WordInfo", f'{EXPORT_FOLDER}/{wordinfo_output_xml_file}')
         export_table_to_xml("WordsGroups", f'{EXPORT_FOLDER}/{wordsgroups_output_xml_file}')
+        export_table_to_xml("Phrases", f'{EXPORT_FOLDER}/{phrases_output_xml_file}')
 
         print("Success!")
 
-        file_path = f'{EXPORT_FOLDER}/output.zip'
+        file_path = f'{ZIPS_FOLDER}/output.zip'
         zip_files(file_path)
         data = send_file(file_path, as_attachment=True)
 
@@ -923,7 +925,7 @@ def upload_zip():
         # Check if the file is a valid ZIP file
         if file and file.filename.endswith('.zip'):
             # Save the file to the server
-            file_path = os.path.join(IMPORT_FOLDER, file.filename)
+            file_path = os.path.join(ZIPS_FOLDER, file.filename)
             file.save(file_path)
 
             # Open the ZIP file and extract its contents
@@ -931,12 +933,11 @@ def upload_zip():
                 zip_ref.extractall(IMPORT_FOLDER)
 
             import_articles_from_xml_to_oracle()
-            import_xml_to_oracle(groups_output_xml_file, 'Groups')
             import_xml_to_oracle(words_output_xml_file, 'Words')
-            import_xml_to_oracle(expressions_output_xml_file, 'Expressions')
             import_xml_to_oracle(wordsgroups_output_xml_file, 'WordsGroups')
             import_xml_to_oracle(wordinfo_output_xml_file, 'WordInfo')
-            import_xml_to_oracle(expressionswords_output_xml_file, 'ExpressionsWords')
+            import_xml_to_oracle(phrases_output_xml_file, 'Phrases')
+            import_xml_to_oracle(groups_output_xml_file, 'Groups')
 
             return jsonify({"message": f"File {file.filename} uploaded successfully!"}), 200
         else:

@@ -105,6 +105,9 @@ class _ShowWordsState extends State<ShowWordsWidget> {
                                     for(final word in response['data']){
                                       var cleanWord = word;
                                       cleanWord[0] = cleanWord[0].toString().toLowerCase().replaceAll(',', '').replaceAll('.', '').replaceAll('!', '');
+                                      String temp = cleanWord[0];
+                                      cleanWord[0] = cleanWord[5];
+                                      cleanWord[5] = temp;
                                       _wordsList.add(cleanWord);
                                     }
                                   }

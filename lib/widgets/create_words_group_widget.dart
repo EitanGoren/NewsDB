@@ -80,7 +80,7 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
       backgroundColor: Colors.orange.shade100,
       body: Row(children: [
         Expanded(
-          flex: 190,
+          flex: 150,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -325,12 +325,12 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
                         dynamic temp = GroupWordsListWidget(index: index, wordsData: allWordsList, clickedWordsList: clickedWordsList);
                         return temp;
                       },
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 10),
                     ) : const Center(child: Text("Nothing to show...", style: TextStyle(fontSize: 20, color: Colors.black54),),),
                 ),
               ),
               Expanded(
-                flex: 12,
+                flex: 20,
                 child: Row(
                   children: [
                     Expanded(flex: 2, child: SizedBox(child: Container(height: 3, color: Colors.grey.shade50),),),
@@ -340,7 +340,7 @@ class _CreateWordsGroupState extends State<CreateWordsGroupWidget> {
                 ),
               ),
               Expanded(
-                flex: 120,
+                flex: 70,
                 child: Column(
                   children: [
                     Expanded(
